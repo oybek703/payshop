@@ -5,8 +5,9 @@ import { MdSecurity } from 'react-icons/md'
 import { BsSuitHeart } from 'react-icons/bs'
 import { RiAccountCircleLine, RiArrowDropDownFill } from 'react-icons/ri'
 import UserMenu from '@/components/header/UserMenu'
+import { ICountry } from '@/interfaces/ip-detection.interfaces'
 
-const Top = () => {
+const Top = ({ flag, name }: ICountry) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(true)
   const [visible, setVisible] = useState<boolean>(false)
   return (
@@ -15,8 +16,14 @@ const Top = () => {
         <div />
         <ul className={styles.top__list}>
           <li className={styles.li}>
-            <Image width={20} height={20} src="/images/flag.png" alt={'Country logo'} />
-            <span>Uzbekistan / usd</span>
+            <Image
+              width={20}
+              height={20}
+              // src={flag}
+              src="/images/flag.png"
+              alt={name}
+            />
+            <span>{name} / usd</span>
           </li>
           <li className={styles.li}>
             <MdSecurity />
