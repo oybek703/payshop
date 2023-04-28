@@ -3,8 +3,9 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { configureStore } from '@reduxjs/toolkit'
 import cart from '@/store/cartSlice'
+import { countryReducer } from '@/store/countrySlice'
 
-const reducers = combineReducers({ cart })
+const reducers = combineReducers({ cart, country: countryReducer })
 
 const reducer = persistReducer({ key: 'root', storage }, reducers)
 

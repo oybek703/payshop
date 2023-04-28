@@ -5,10 +5,11 @@ import { MdSecurity } from 'react-icons/md'
 import { BsSuitHeart } from 'react-icons/bs'
 import { RiAccountCircleLine, RiArrowDropDownFill } from 'react-icons/ri'
 import UserMenu from '@/components/header/UserMenu'
-import { ICountry } from '@/interfaces/ip-detection.interfaces'
+import { useSession } from 'next-auth/react'
+import { ISession } from '@/interfaces/auth.interfaces'
 
-const Top = ({ flag, name }: ICountry) => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(true)
+const Top = () => {
+  const { data: session } = useSession()
   const [visible, setVisible] = useState<boolean>(false)
   return (
     <div className={styles.top}>
@@ -21,9 +22,10 @@ const Top = ({ flag, name }: ICountry) => {
               height={20}
               // src={flag}
               src="/images/flag.png"
-              alt={name}
+              alt={'Country name'}
             />
-            <span>{name} / usd</span>
+            {/* TODO Set location by ip address */}
+            <span>Uzbekistan / usd</span>
           </li>
           <li className={styles.li}>
             <MdSecurity />
@@ -44,11 +46,16 @@ const Top = ({ flag, name }: ICountry) => {
             onMouseOver={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
           >
-            {loggedIn ? (
+            {session ? (
               <li className={styles.li}>
                 <div className={styles.flex}>
-                  <Image width={20} height={20} src="/images/user.png" alt="Avatar" />
-                  <span>John Doe</span>
+                  <Image
+                    width={20}
+                    height={20}
+                    src={session.user?.image}
+                    alt={session.user?.name}
+                  />
+                  <span>{session.user?.name}</span>
                   <RiArrowDropDownFill />
                 </div>
               </li>
@@ -61,7 +68,7 @@ const Top = ({ flag, name }: ICountry) => {
                 </div>
               </li>
             )}
-            {visible && <UserMenu loggedIn={loggedIn} />}
+            {visible && <UserMenu session={session as ISession} />}
           </div>
         </ul>
       </div>

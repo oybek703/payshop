@@ -6,7 +6,7 @@ import Image from 'next/image'
 const NewsLetter = () => {
   return (
     <div className={styles.footer__newsletter}>
-      <h3>SIGN UP FOR OUT NEWSLETTER</h3>
+      <h3>SIGN UP FOR OUR NEWSLETTER</h3>
       <div className={styles.footer__flex}>
         <input type="text" placeholder="Your email address..." />
         <button className={styles.btn__primary}>SUBSCRIBE</button>

@@ -24,6 +24,7 @@ const Copyright = () => {
           ))}
           <li>
             <a>
+              {/* TODO Set location with dynamic value */}
               <IoLocationSharp /> Uzbekistan
             </a>
           </li>

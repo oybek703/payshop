@@ -4,15 +4,19 @@ import { GetServerSideProps } from 'next'
 import { ICountry } from '@/interfaces/ip-detection.interfaces'
 import useActions from '@/hooks/useActions'
 import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function Home({ country }: HomeProps) {
+  const { data: session } = useSession()
+  console.log(session)
   const { setCountry } = useActions()
   useEffect(() => {
     setCountry(country)
+    //  eslint-disable-next-line
   }, [country])
   return (
     <div>
-      <Header {...country} />
+      <Header />
       <Footer />
     </div>
   )

@@ -5,11 +5,11 @@ import Top from '@/components/header/Top'
 import HeaderMain from '@/components/header/HeaderMain'
 import { ICountry } from '@/interfaces/ip-detection.interfaces'
 
-const Header = (country: ICountry) => {
+const Header = () => {
   return (
     <header className={styles.header}>
       <Ad />
-      <Top {...country} />
+      <Top />
       <HeaderMain />
     </header>
   )
