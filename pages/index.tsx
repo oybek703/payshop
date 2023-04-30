@@ -8,7 +8,6 @@ import { useSession } from 'next-auth/react'
 
 export default function Home({ country }: HomeProps) {
   const { data: session } = useSession()
-  console.log(session)
   const { setCountry } = useActions()
   useEffect(() => {
     setCountry(country)
@@ -17,6 +16,7 @@ export default function Home({ country }: HomeProps) {
   return (
     <div>
       <Header />
+      <h1>Home page</h1>
       <Footer />
     </div>
   )
