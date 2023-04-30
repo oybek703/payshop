@@ -1,6 +1,6 @@
 import React from 'react'
 import { MoonLoader } from 'react-spinners'
-import styles from './hash-loader.module.scss'
+import styles from './loader-spinner.module.scss'
 
 const LoaderSpinner = ({ loading }: { loading: boolean }) => {
   return (

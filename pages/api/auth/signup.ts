@@ -6,6 +6,8 @@ import User from '@/models/User'
 import { hash } from 'bcrypt'
 import { createActivationToken } from '@/utils/tokens'
 import { sendEmail } from '@/utils/emails/send-email'
+import { resetPasswordTemplate } from '@/utils/emails/reset-password-template'
+import { activateEmailTemplate } from '@/utils/emails/activate-email-template'
 
 const handler = nc()
 
@@ -31,7 +33,7 @@ handler.post(async (req: NextRequest, res: NextResponse, next) => {
     const newUser = await user.save()
     const activationToken = createActivationToken({ id: newUser._id.toString() })
     const url = `${process.env.BASE_URL}/activate${activationToken}`
-    await sendEmail(email, url, '', 'Activate your account!')
+    await sendEmail(email, url, '', 'Activate your account!', activateEmailTemplate(to, url))
     await disconnectDb()
     res.json({ message: 'Register success. Please activate your email to start!' })
   } catch (e: unknown) {

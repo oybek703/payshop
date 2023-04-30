@@ -5,3 +5,9 @@ export const createActivationToken = (payload: unknown) => {
     expiresIn: '2d'
   })
 }
+
+export const createResetToken = (payload: unknown) => {
+  return sign(payload, process.env.RESET_TOKEN_SECRET, {
+    expiresIn: '6h'
+  })
+}

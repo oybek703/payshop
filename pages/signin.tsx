@@ -13,7 +13,8 @@ import { useRouter } from 'next/router'
 import { getCsrfToken, getProviders, getSession, signIn } from 'next-auth/react'
 import Image from 'next/image'
 import axios, { AxiosError } from 'axios'
-import LoaderSpinner from '@/components/loaders/hash-loader'
+import LoaderSpinner from '@/components/loaders/loader-spinner'
+import { ApiRoutes } from '@/interfaces/api-routes'
 
 interface IInitialValues {
   login_email: string
@@ -125,11 +126,11 @@ const SignIn = ({ providers, callbackUrl, csrfToken }: SignInProps) => {
       <div className={styles.login}>
         <div className={styles.login__container}>
           <div className={styles.login__header}>
-            <div className={styles.back__svg}>
+            <Link href={ApiRoutes.home} className={styles.back__svg}>
               <BiLeftArrowAlt />
-            </div>
+            </Link>
             <span>
-              We&apos;d be happy to join us! <Link href="/">Go Store</Link>
+              We&apos;d be happy to join us! <Link href={ApiRoutes.home}>Go Store</Link>
             </span>
           </div>
           <div className={styles.login__form}>
@@ -161,7 +162,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }: SignInProps) => {
                   <CircledIconBtn type="submit" text="Sign In" />
                   <div className={styles.error}>{login_email && <span>{login_error}</span>}</div>
                   <div className={styles.forgot}>
-                    <Link href="/forgot">Forgot password?</Link>
+                    <Link href={ApiRoutes.forgotPassword}>Forgot password?</Link>
                   </div>
                 </Form>
               )}
@@ -256,7 +257,7 @@ export const getServerSideProps: GetServerSideProps<SignInProps> = async context
     }
   }
   return {
-    props: { providers, callbackUrl, csrfToken }
+    props: { providers, callbackUrl: callbackUrl || '/', csrfToken }
   }
 }
 

@@ -1,7 +1,12 @@
 import { createTransport } from 'nodemailer'
-import { activateEmailTemplate } from '@/utils/emails/activate-email-template'
 
-export const sendEmail = async (to: string, url: string, txt: string, subject: string) => {
+export const sendEmail = async (
+  to: string,
+  url: string,
+  txt: string,
+  subject: string,
+  html: string
+) => {
   const smtpTransport = createTransport({
     service: process.env.SMTP_SERVICE,
     host: process.env.SMTP_HOST,
@@ -17,7 +22,7 @@ export const sendEmail = async (to: string, url: string, txt: string, subject: s
       from: 'PayShop',
       to,
       subject,
-      html: activateEmailTemplate(to, url)
+      html
     })
   } catch (e) {
     console.log(e)

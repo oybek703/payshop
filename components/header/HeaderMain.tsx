@@ -4,12 +4,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { RiSearch2Line } from 'react-icons/ri'
 import { FaOpencart } from 'react-icons/fa'
+import { ApiRoutes } from '@/interfaces/api-routes'
 
 const HeaderMain = () => {
   return (
     <div className={styles.main}>
       <div className={styles.main__container}>
-        <Link href="/" className={styles.logo}>
+        <Link href={ApiRoutes.home} className={styles.logo}>
           <Image src="/images/logo.png" alt="Logo" width={170} height={30} />
         </Link>
         <div className={styles.search}>
@@ -18,7 +19,7 @@ const HeaderMain = () => {
             <RiSearch2Line />
           </div>
         </div>
-        <Link className={styles.cart} href="/cart">
+        <Link className={styles.cart} href={ApiRoutes.cart}>
           <FaOpencart />
           <span>0</span>
         </Link>
