@@ -86,6 +86,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }: SignInProps) => {
   const handleSignUp = async () => {
     try {
       setLoading(true)
+      setUser({ ...user, error: '' })
       const { data } = await axios.post('/api/auth/signup', { name, email, password })
       setUser({ ...user, error: '', success: data.message })
       setLoading(false)
@@ -176,7 +177,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }: SignInProps) => {
                   {provider.name !== 'Credentials' && (
                     <button className={styles.social_btn} onClick={() => signIn(provider.id)}>
                       <Image
-                        src={`/images/${provider.name}.png`}
+                        src={`/images/sign-in/${provider.name}.png`}
                         alt={provider.name}
                         width={36}
                         height={36}

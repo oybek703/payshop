@@ -5,6 +5,8 @@ import { ICountry } from '@/interfaces/ip-detection.interfaces'
 import useActions from '@/hooks/useActions'
 import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import styles from '@/styles/home.module.scss'
+import Main from '@/components/home/main'
 
 export default function Home({ country }: HomeProps) {
   const { data: session } = useSession()
@@ -14,11 +16,15 @@ export default function Home({ country }: HomeProps) {
     //  eslint-disable-next-line
   }, [country])
   return (
-    <div>
+    <>
       <Header />
-      <h1>Home page</h1>
+      <div className={styles.home}>
+        <div className={styles.container}>
+          <Main />
+        </div>
+      </div>
       <Footer />
-    </div>
+    </>
   )
 }
 
