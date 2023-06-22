@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  place-items: center;
+  padding: 20%;
+}
+
+.success {
+  color: $success-color;
+  white-space: nowrap;
+}

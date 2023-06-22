@@ -6,6 +6,9 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { ReduxStateProvider } from '@/redux/Provider'
 import { ICountry } from '@/interfaces/ip-detection.interfaces'
+import NextAuthProvider from '@/components/NextAuthProvider'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/lib/autOptions'
 
 const inter = Inter({ subsets: ['latin'], weight: '500' })
 
@@ -34,16 +37,19 @@ const getIpLocation = async (): Promise<ICountry | undefined> => {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const country = await getIpLocation()
+  const session = await getServerSession(authOptions as any)
   return (
     <html lang="en">
       <body suppressHydrationWarning className={inter.className}>
-        <ReduxStateProvider>
-          <Header country={country} />
-          <div className={styles.home}>
-            <div className="container">{children}</div>
-          </div>
-          <Footer />
-        </ReduxStateProvider>
+        <NextAuthProvider>
+          <ReduxStateProvider>
+            <Header session={session} country={country} />
+            <div className={styles.home}>
+              <div className="container">{children}</div>
+            </div>
+            <Footer />
+          </ReduxStateProvider>
+        </NextAuthProvider>
       </body>
     </html>
   )

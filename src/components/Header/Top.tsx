@@ -1,26 +1,18 @@
-'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './header.module.scss'
-import Image from 'next/image'
 import { MdSecurity } from 'react-icons/md'
 import { BsSuitHeart } from 'react-icons/bs'
-import { RiAccountCircleLine, RiArrowDropDownFill } from 'react-icons/ri'
-import UserMenu from '@/components/header/UserMenu'
-import { useAppSelector } from '@/redux/hooks'
+import AccountPart from '@/components/Header/AccountPart'
+import CountryPart from '@/components/Header/CountryPart'
+import { ISession } from '@/interfaces/auth.interfaces'
 
-const Top = () => {
-  const { name, flag, currency } = useAppSelector(state => state.country)
+const Top = ({ session }: { session: ISession }) => {
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
         <div />
         <ul className={styles.top__list}>
-          <li className={styles.li}>
-            <Image width={20} height={20} src={flag} alt={name} />
-            <span>
-              {name} / {currency}
-            </span>
-          </li>
+          <CountryPart />
           <li className={styles.li}>
             <MdSecurity />
             <span>Buyer protection</span>
@@ -35,15 +27,7 @@ const Top = () => {
             <BsSuitHeart />
             <span>Wishlist</span>
           </li>
-          <div className={styles.li}>
-            <li className={styles.li}>
-              <div className={styles.flex}>
-                <RiAccountCircleLine />
-                <span>Account</span>
-                <RiArrowDropDownFill />
-              </div>
-            </li>
-          </div>
+          <AccountPart />
         </ul>
       </div>
     </div>

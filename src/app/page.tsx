@@ -1,9 +1,5 @@
-import styles from './home.module.scss'
+import Main from '@/components/Main'
 
 export default function Home() {
-  return (
-    <main className={styles.home}>
-      <h1>Main</h1>
-    </main>
-  )
+  return <Main />
 }
